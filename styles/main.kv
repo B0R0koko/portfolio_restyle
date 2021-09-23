@@ -1,0 +1,68 @@
+# Main kivy file doing WindowManager and defining main utils
+WindowManager:
+    FirstScreen
+    OptionScreen
+    SecondScreen
+    ThirdScreen
+
+
+# Background widget
+<Background@Widget>:
+    Image:
+        size: root.size
+        source: 'images/background.png'
+        allow_stretch: True
+        keep_ratio: False
+
+
+#  Navgation bar button class
+<NavBarButton@Button>:
+    source_normal: None
+    source_pressed: None
+    switch_to: None
+    background_color: (0,0,0,0)
+    background_normal: ''
+    on_press: 
+        child.source = self.source_pressed 
+    on_release: 
+        child.source = self.source_normal
+        app.root.current = self.switch_to
+        
+    Image:
+        id: child
+        source: self.parent.source_normal
+        size: self.parent.size
+        pos: self.parent.pos
+
+
+# Bottom navigation bar
+<NavBar@BoxLayout>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            size_hint: .5, .5
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,.4)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [48,]
+            BoxLayout:
+                padding: ('15dp',0,'15dp',0)
+                size_hint: .5, .5
+                pos_hint: {'center_y': .5}
+                NavBarButton:
+                    switch_to: 'firstscreen'
+                    source_normal: 'images/buttons/wallet.png'
+                    source_pressed: 'images/buttons/wallet_pressed.png'
+                NavBarButton:
+                    switch_to: 'secondscreen'
+                    source_normal: 'images/buttons/settings.png'
+                    source_pressed: 'images/buttons/settings_pressed.png'
+                NavBarButton:
+                    switch_to: 'thirdscreen'
+                    source_normal: 'images/buttons/exchange.png'
+                    source_pressed: 'images/buttons/exchange_pressed.png'
+            

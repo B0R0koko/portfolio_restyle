@@ -1,0 +1,137 @@
+#: import utils kivy.utils
+
+# Option menu for cryptos
+
+<OptionCrypto>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    size_hint_y: None
+    height: '70dp'
+
+    BoxLayout:
+        size_hint_x: .8
+
+        canvas.before:
+            Color: 
+                rgba: (1,1,1,.3)
+
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [36,]
+
+        BoxLayout:
+            padding: ('10dp', '10dp', '20dp', '10dp')
+
+            Image:
+                size_hint_x: .15
+                source: 'images/cryptoicons/bitcoin.png'
+            
+            BoxLayout:
+                size_hint_x: .65
+                orientation: 'vertical'
+
+                Label:
+                    text: 'Bitcoin'
+                    text_size: self.size
+                    halign: 'left'
+                    font_name: 'raleway'
+
+                Label:
+                    text: 'BTC'
+                    text_size: self.size
+                    halign: 'left'
+                    font_name: 'raleway'
+            
+            CheckBox:
+                size_hint_x: .2
+                background_checkbox_down: 'images/buttons/switch_on.png'
+                background_checkbox_normal: 'images/buttons/switch_off.png'
+
+
+<OptionScreen>:
+    name: 'optionscreen'
+
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex('#6b3657')
+        Rectangle:
+            size: root.size
+            pos: root.pos
+        
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+                size_hint_y: .1
+                padding: ('10dp', '10dp', '5dp', 0)
+
+                Button:
+                    size_hint_x: .1
+                    background_color: (0,0,0,0)
+                    background_normal: ''
+                    on_release: app.root.current = 'firstscreen'
+
+                    canvas.before:
+                        Color: 
+                            rgba: (1,1,1,1)
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: 'images/buttons/left-arrow.png'
+                Label:
+                    size_hint_x: .8 
+                    pos_hint: {'center_x': .5}
+                    text: 'ASSETS' 
+                    text_size: self.size
+                    valign: 'center'
+                    halign: 'center'
+                    font_name: 'raleway'
+                    font_size: 25
+                    bold: True
+
+                BoxLayout:
+                    size_hint_x: .1
+
+            BoxLayout:
+                size_hint_y: .2
+                padding: ('10dp', '10dp', '10dp', 0)
+                orientation: 'vertical'
+
+                Label:
+                    size_hint_y: .3
+                    text: 'Assets (9/155)'
+                    text_size: self.size
+                    valign: 'top'
+                    halign: 'left'
+                
+                Label:
+                    size_hint_y: .7
+                    text: "Enable assets to add them to your portfolio. Assets with a balance cannot be displayed"
+                    text_size: self.size
+                    valign: 'top'
+                    halign: 'left'
+                    multiline: True
+
+
+            BoxLayout:
+                size_hint_y: .7
+
+                ScrollView:
+
+                    GridLayout:
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: '10dp'
+                        cols: 1
+
+                        OptionCrypto:
+                        OptionCrypto:
+                        OptionCrypto:
+                        OptionCrypto:
+                        OptionCrypto:
+                        OptionCrypto:
+                        OptionCrypto:

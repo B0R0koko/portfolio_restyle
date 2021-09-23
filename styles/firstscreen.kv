@@ -1,0 +1,218 @@
+#: import utils kivy.utils
+
+
+# ------------------------------------------------------------------------------------------# ------------------------------------------------------------------------------------------
+# App home screen
+<FirstScreen>:
+    name: 'firstscreen'
+
+    Background:
+    BoxLayout:
+        orientation: 'vertical'
+
+        MainContentFirst:
+            size_hint_y: .8
+        NavBar:
+            size_hint_y: .2
+
+# ------------------------------------------------------------------------------------------
+
+# Box of all information on given crypto
+<CryptoBox>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    size_hint_y: None
+    height: '70dp'
+    crypto_name: ''
+    crypto_short_name: ''
+    image_path: ''
+
+    Button:
+        size_hint: .8, 1
+        background_color: (0,0,0,0)
+        background_normal: ''
+
+        canvas.before:
+            Color: 
+                rgba: (1,1,1,.3)
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [36,]
+                
+        BoxLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            orientation: 'vertical'
+            BoxLayout:
+                size_hint_y: .6
+                padding: (0,'5dp','15dp',0)
+
+                Image:
+                    size_hint_x: .2
+                    source: root.image_path
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: .8
+                    
+                    BoxLayout:
+                        size_hint_y: .5
+
+                        Label:
+                            text_size: self.size
+                            text: root.crypto_short_name
+                            halign: 'left'
+                            valign: 'top'
+                            font_name: 'raleway'
+                            bold: True
+                            
+                        Label:
+                            text_size: self.size
+                            text: '1.24343'
+                            halign: 'right'
+                            valign: 'top'
+                            font_name: 'raleway'
+                            italic: True
+                            bold: True
+
+                    BoxLayout:
+                        size_hint_y: .5
+
+                        Label:
+                            text_size: self.size
+                            text: root.crypto_name
+                            halign: 'left'
+                            valign: 'top'
+                            font_name: 'raleway'
+
+                        Label:
+                            text_size: self.size
+                            text: '₽4,834,3843.98'
+                            halign: 'right'
+                            valign: 'top'
+                            font_name: 'raleway'
+                            italic: True
+
+            BoxLayout:
+                padding: (0,0,'15dp','5dp')
+                size_hint_y: .4
+
+                BoxLayout:
+                    size_hint_x: .2
+                
+                BoxLayout:
+                    size_hint_x: .8
+                    Label:
+                        text_size: self.size
+                        text: '₽3,503,3843.98'
+                        halign: 'left'
+                        valign: 'center'
+                        font_name: 'raleway'
+                        italic: True
+
+                    Label:
+                        text_size: self.size
+                        text: '+3.11%'
+                        halign: 'right'
+                        valign: 'center'
+                        font_name: 'raleway'
+                        bold: True
+                        color: utils.get_color_from_hex('#07e642')
+
+# ------------------------------------------------------------------------------------------
+
+<AddMoreButton@AnchorLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    size_hint_y: None
+    height: '70dp' 
+
+    Button:
+        size_hint: .8, 1 
+        background_color: (0,0,0,0)
+        background_normal: ''
+        text: 'Add More'
+        font_name: 'raleway'
+        bold: True
+        on_press: app.root.current = 'optionscreen'
+
+        canvas.before:
+            Color: 
+                rgba: (1,1,1,.1)
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [36,]
+
+            Color: 
+                rgba: (1,1,1,.5)
+            Line:
+                rounded_rectangle: (self.pos[0],self.pos[1],self.size[0],self.size[1],36)
+                width: 1.2
+
+# ------------------------------------------------------------------------------------------
+
+<MainContentFirst>:
+    orientation: 'vertical'
+
+    BoxLayout:
+        size_hint_y: .4
+        orientation: 'vertical'
+
+        Label:
+            id: portfolio_value
+            size_hint_y: .7
+            value: ['15456', '54']
+            text: f'[size=40]₽[/size][size=60]{self.value[0]}[/size].{self.value[1]}'
+            text_size: self.size
+            valign: 'center'
+            halign: 'center'
+            font_name: 'raleway'
+            italic: True
+            bold: True
+            markup: True
+
+        Label:
+            size_hint_y: .3
+            text: 'Portfolio #1'
+            text_size: self.size
+            valign: 'center'
+            halign: 'center'
+            font_name: 'raleway'
+            bold: True
+            markup: True
+
+
+    BoxLayout:
+        size_hint_y: .6
+
+        ScrollView:
+
+            GridLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '10dp'
+                cols: 1
+                
+                BoxLayout:
+                    id: crypto_slider
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: '10dp'
+                    
+                    CryptoBox:
+                        crypto_name: 'Bitcoin'
+                        crypto_short_name: 'BTC'
+                        image_path: 'images/cryptoicons/bitcoin.png'
+                    CryptoBox:
+                        crypto_name: 'Ethereum'
+                        crypto_short_name: 'ETH'
+                        image_path: 'images/cryptoicons/ethereum.png'
+                    CryptoBox:
+                        crypto_name: 'Cardano'
+                        crypto_short_name: 'ADA'
+                        image_path: 'images/cryptoicons/cardano.png'
+        
+                AddMoreButton:
